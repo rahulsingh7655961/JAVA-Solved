@@ -10,23 +10,14 @@ public class SubsetSum {
 
             int n = Integer.parseInt(br.readLine());
             int[] nums = new int[n];
-            // String str2 = br.readLine();
             for (int i = 0; i < n; i++) {
                 nums[i] = Integer.parseInt(br.readLine());
             }
-
-            // int[] values = new int[n];
-            // String str1 = br.readLine();
-            // for (int i = 0; i < n; i++) {
-            //     values[i] = Integer.parseInt(str1.split(" ")[i]);
-            // }
-
             int target = Integer.parseInt(br.readLine());
             
             Solution ob = new Solution();
             boolean isPresent = ob.SubsetSum(nums, n, target);
             System.out.println(isPresent);
-
     }
 }
 class Solution{
