@@ -26,20 +26,47 @@ public class knapscak {
             int cap = Integer.parseInt(br.readLine());
 
             int maxProfit = knapsack(wts, values, n, cap);
-            int maxProfit1 = knapsackMEMO(wts, values, n, cap);
-            int maxProfit2 = knapsackTD(wts, values, n, cap);
+            int maxProfit1 = knapsackTD(wts, values, n, cap);
+            int maxProfit2 = knapsackBU(wts, values, n, cap);
             System.out.println(maxProfit);
             System.out.println(maxProfit1);
             System.out.println(maxProfit2);
-
         }
     }
 
-    private static int knapsackTD(int[] wts, int[] values, int n, int cap) {
+    private static int knapsack(int[] wt, int[] val, int n, int capacity) {
+
+        if (n == 0 || capacity == 0)
+            return 0;
+
+        if (wt[n - 1] <= capacity)
+            return Math.max(knapsack(wt, val, n - 1, capacity),
+                    val[n - 1] + knapsack(wt, val, n - 1, capacity - wt[n - 1]));
+
+        return knapsack(wt, val, n - 1, capacity);
+    }
+
+    private static int knapsackTD(int[] wt, int[] val,int n, int capacity) {
+            if(n==0 || capacity==0)
+                return 0;
+            
+            int dp[][] = new int[n+1][capacity+1];
+            for(int[] i : dp)
+                Arrays.fill(i,-1);
+            if(dp[n][capacity]!=-1)
+                return dp[n][capacity];
+            
+            if(wt[n-1]<=capacity)
+                return dp[n][capacity] = Math.max(knapsackTD(wt,val,n-1,capacity),
+                                                  val[n-1]+knapsackTD(wt,val,n-1,capacity-wt[n-1]));
+        
+            return dp[n][capacity] = knapsackTD(wt, val, n-1, capacity);
+    }
+
+    private static int knapsackBU(int[] wts, int[] values, int n, int cap) {
         
         int dp[][] = new int[n+1][cap+1];
         
-
         for (int i = 0; i < dp.length; i++) {
             for (int j = 0; j < dp[0].length; j++) {
                 if(i==0 || j==0)
@@ -59,38 +86,6 @@ public class knapscak {
         }
         return dp[n][cap];
     }
-
-    private static int knapsack(int[] wt, int[] val, int n, int capacity) {
-
-        if (n == 0 || capacity == 0)
-            return 0;
-
-        if (wt[n - 1] <= capacity)
-            return Math.max(knapsack(wt, val, n - 1, capacity),
-                    val[n - 1] + knapsack(wt, val, n - 1, capacity - wt[n - 1]));
-
-        return knapsack(wt, val, n - 1, capacity);
-    }
-
-    private static int knapsackMEMO(int[] wt, int[] val,int n, int capacity) {
-            if(n==0 || capacity==0)
-                return 0;
-            
-            int dp[][] = new int[n+1][capacity+1];
-            for(int[] i : dp)
-                Arrays.fill(i,-1);
-            if(dp[n][capacity]!=-1)
-                return dp[n][capacity];
-            
-            if(wt[n-1]<=capacity)
-                return dp[n][capacity] = Math.max( knapsack(wt,val,n-1,capacity) , val[n-1]+knapsack(wt, val, n-1, capacity - wt[n-1]));
-        
-                return dp[n][capacity] = knapsack(wt, val, n-1, capacity);
-    }
-
-
-
-
 }
 
 

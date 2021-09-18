@@ -1,19 +1,19 @@
 package BinarySearch;
-
+import java.util.*;
 class BS{
     public static void main(String[] args) {
-        int arr[] = {1,3,5,7,8,10,12,56,78,90,344};//Array should be sorted.......
-        int arr1[] ={10,9,8,7,6,5,3,2,1};
-        int ans= BinarySearch(arr,344);
-//      int ans = recursiveBinarySearch(arr,75,0,arr.length-1);
-        int ans1 = binSearchReverse(arr1,2);
+       Scanner sc = new Scanner(System.in);
+       int n = sc.nextInt();
+       int x = sc.nextInt();
 
-//      int ans = orderNotKnownBinarySearch(arr, 56);
-//      int ans1 = orderNotKnownBinarySearch(arr1, 6);
+       int arr[] = new int[n];
+       for (int i = 0; i < arr.length; i++) {
+        arr[i] = sc.nextInt();           
+       }
 
-        System.out.println((ans==-1)?"Element not found!!":"Element found at "+ans+"th index");
-        System.out.println((ans1==-1)?"Element not found!!":"Element found at "+ans1+"th index");
-        
+       int ans = BinarySearch(arr, x);
+       System.out.println(ans);
+       sc.close();
     }
 
     static int BinarySearch(int arr[],int x){

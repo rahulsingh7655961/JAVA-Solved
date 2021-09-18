@@ -1,18 +1,33 @@
-import java.util.Scanner;
+import java.util.*;
 
-class array{
-    public static void main(String[] args) {
-       //int[] a = {1,2,3,4,5};
-       Scanner sc = new Scanner(System.in);
-       int a[] = new int[sc.nextInt()];
-       for(int i=0;i<a.length;i++)
-        a[i] = sc.nextInt();
-        for (int element : a)
-            System.out.print(element+"::");
-        System.out.println();
-        for(int i:a)
-        System.out.print(i+"==");
-        sc.close();
-       
-    }
+class array {
+	
+	static int sumOfPrimes(int n)
+	{
+		boolean prime[]=new boolean[n + 1];
+	
+		Arrays.fill(prime, true);
+	
+		for (int p = 2; p * p <= n; p++) {
+	
+			if (prime[p] == true) {
+	
+				for (int i = p * 2; i <= n; i += p)
+					prime[i] = false;
+			}
+		}
+	
+		int sum = 0;
+		for (int i = 2; i <= n; i++)
+			if (prime[i])
+				sum += i;
+		return sum;
+	}
+	public static void main(String args[])
+	{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        System.out.print(sumOfPrimes(n));
+		sc.close();
+	}
 }

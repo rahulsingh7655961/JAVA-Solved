@@ -24,6 +24,7 @@ class Solution{
     boolean SubsetSum(int[] nums,int n,int target){
         boolean dp[][] = new boolean[n+1][target+1];
         
+        //Initialiazation in other loop to pass all cases
         for(int i=0;i<dp.length;i++){
             for(int j=0;j<dp[0].length;j++){
                 if(i==0)
